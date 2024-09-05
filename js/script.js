@@ -19,3 +19,16 @@ function showData(dataArray) {
 }
 
 // Escribe el código necesario para realizar el fetch al archivo con los datos y mostrar los estudiantes con la función showData
+document.addEventListener('DOMContentLoaded',function(){
+  fetch(DATA_URL)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok ' + response.statusText);
+    }
+    return response.json(); // Asegúrate de invocar la función response.json()
+  })
+  .then(data => {
+    console.log('Data received:', data); // Verifica que los datos se están recibiendo correctamente
+    container.innerHTML += `<p><strong>Profesor:</strong></p>`+`<p>`+data.teacherName +`</p>` +`<p><strong>Alumnos:</strong></p>` 
+    showData(data.students)
+  })})
